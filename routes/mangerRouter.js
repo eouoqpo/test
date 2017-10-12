@@ -29,6 +29,14 @@ route.get('/find_topic',(req,resp)=>{
     });
 });
 
+route.get('/find_subject',(req,resp)=>{
+    mangerDB.find_subject().then((data)=>{
+        resp.send(data);
+    }).catch((error)=>{
+        resp.send(error);
+    });
+});
+
 route.get('/find_epartment',(req,resp)=>{
     mangerDB.find_epartment().then((data)=>{
         resp.send(data);

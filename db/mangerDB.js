@@ -13,6 +13,10 @@ module.exports ={
         var sql = "select * from tbl_exam_topic";
         return pool.execute(sql);
     },
+    find_subject(){
+        var sql = "select * from tbl_exam_subject";
+        return pool.execute(sql);
+    },
     find_epartment(){
         var sql = "select * from tbl_exam_epartment";
         return pool.execute(sql);

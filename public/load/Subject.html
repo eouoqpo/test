@@ -85,138 +85,139 @@
 
 
 <script type="text/javascript">
-  $(function(){
-    /*点击单个添加题目，页面跳转*/
-    $('.c_condition .icon_add .icon_r').click(function(){
-      $('.right').load('./load/addSubject.html');
-    })
-
-    /*类型信息*/
-    $.getJSON('/exam/manger/subject_type',function(data){
-        //克隆一行
-        var tr = $('tr:hidden').clone().removeAttr('hidden');
-        tr.find(".chose").html("");
-        tr.children('td').eq(0).html("类型");
-        data.forEach(function(item,index){
-          if(index == 0){
-            var a = $("<a href='javascript:void(0)' id="
-            +item.id+" name="
-            +item.name+" class='active3'>"
-            +item.realName+"</a>");
-          }else{
-            a=$("<a href='javascript:void(0)' id="
-            +item.id+" name="+item.name+">"+item.realName+"</a>")
-          }
-          /*追加*/
-          tr.find('.chose').append(a);
+    $(function(){
+        /*点击单个添加题目，页面跳转*/
+        $('.c_condition .icon_add .icon_r').click(function(){
+        $('.right').load('./load/addSubject.html');
         })
-        $('tbody').append(tr);
-    })
 
-    /*方向信息*/
-    $.getJSON('/exam/manger/find_topic',function(data){
-        var tr = $('tr:hidden').clone().removeAttr('hidden');
-        tr.find(".chose").html("");
-        tr.children('td').eq(0).html("方向");
-        data.forEach(function(item,index){
-          if(index == 0){
-            a=$("<a href='javascript:void(0)' id="
-            +item.id+" name="+item.name+" class='active3'>"+item.title+"</a>")
-          }else{
-            a=$("<a href='javascript:void(0)' id="
-            +item.id+" name="+item.name+">"+item.title+"</a>") 
-          }
-          /*追加*/
-          tr.find('.chose').append(a);
-        })
-        $('tbody').append(tr);
-    })
-
-    /*难易程度信息*/
-    $.getJSON('/exam/manger/subject_level',function(data){
-        var tr = $('tr:hidden').clone().removeAttr('hidden');
-        tr.find(".chose").html("");
-        tr.children('td').eq(0).html("难度");
-        data.forEach(function(item,index){
-            if(index==0){
-                a=$("<a href='javascript:void(0)' id="
-                +item.id+" name="+item.realName+" class='active3'>"
-                +item.realName+"</a>")
-                }else{
-                a=$("<a href='javascript:void(0)' id="
+        /*类型信息*/
+        $.getJSON('/exam/manger/subject_type',function(data){
+            //克隆一行
+            var tr = $('tr:hidden').clone().removeAttr('hidden');
+            tr.find(".chose").html("");
+            tr.children('td').eq(0).html("类型");
+            data.forEach(function(item,index){
+            if(index == 0){
+                var a = $("<a href='javascript:void(0)' id="
                 +item.id+" name="
-                +item.name+">"+item.realName+"</a>")
+                +item.name+" class='active3'>"
+                +item.realName+"</a>");
+            }else{
+                a=$("<a href='javascript:void(0)' id="
+                +item.id+" name="+item.name+">"+item.realName+"</a>")
             }
             /*追加*/
             tr.find('.chose').append(a);
+            })
+            $('tbody').append(tr);
         })
-        $('tbody').append(tr);
-    })
-    /*知识点信息*/
-    $.getJSON('/exam/manger/find_epartment',function(data){
-        var tr = $('tr:hidden').clone().removeAttr('hidden');
-        tr.find(".chose").html("");
-        tr.children('td').eq(0).html("知识点");
-        data.forEach(function(item,index){
+
+        /*方向信息*/
+        $.getJSON('/exam/manger/find_topic',function(data){
+            var tr = $('tr:hidden').clone().removeAttr('hidden');
+            tr.find(".chose").html("");
+            tr.children('td').eq(0).html("方向");
+            data.forEach(function(item,index){
             if(index == 0){
                 a=$("<a href='javascript:void(0)' id="
-                +item.id+" class='active3'>"+item.name+"</a>")
+                +item.id+" name="+item.name+" class='active3'>"+item.title+"</a>")
+            }else{
+                a=$("<a href='javascript:void(0)' id="
+                +item.id+" name="+item.name+">"+item.title+"</a>") 
             }
-            else{
-                a=$("<a href='javascript:void(0)' id="+item.id+">"+item.name+"</a>")                         }
             /*追加*/
             tr.find('.chose').append(a);
+            })
+            $('tbody').append(tr);
         })
-        $('.tablea tbody').append(tr);
-        
-        $('.tablea').on('click','a',function(){
-            /*点击按钮样式改变*/
-            $(this).addClass('active3').siblings().removeClass('active3');
-            /*拿到四个,并向后台发送四个id*/
-            var arr = $('.tablea tbody tr td div a.active3').get();
-            var type='';
-            var direct='';
-            var level='';
-            var topic='';
-            /*拿到四个选项的id*/
-            arr.forEach(function(item,index,arr){
-                var atd = $(item).parent().parent().parent().children().eq(0).html();
-                switch(atd){
-                    case '类型':type=$(item).attr("id");
-                        break;
-                    case '方向':direct=$(item).attr("id");
-                        break;
-                    case '难度':level=$(item).attr("id");
-                        break;
-                    case '知识点':topic=$(item).attr("id");
-                        break;
-                }
-            })
-            //发送到后台,后台根据需要将题目展示出来。
-            //   /exam/manger/find_epartment
-            $.ajax('/exam/manger/querySubject',{
-                // $.ajax('../data/subject.json',{
-                method:"post",
-                //携带的数据
-                data:{
-                    "subject.department.id":direct,
-                    "subject.topic.id":topic,
-                    "subject.subjectType.id":type,
-                    "subject.subjectLevel.id":level,
-                },
-                //成功之后将获取到的后台的题目展示在页面上
-                success:function(data){
-                    // console.log("hello");
-                    showData(data);
-                    // checked();
-                }
-            })
 
-        });
-        // $('.tablea').trigger('click');
-    })
+        /*难易程度信息*/
+        $.getJSON('/exam/manger/subject_level',function(data){
+            var tr = $('tr:hidden').clone().removeAttr('hidden');
+            tr.find(".chose").html("");
+            tr.children('td').eq(0).html("难度");
+            data.forEach(function(item,index){
+                if(index==0){
+                    a=$("<a href='javascript:void(0)' id="
+                    +item.id+" name="+item.realName+" class='active3'>"
+                    +item.realName+"</a>")
+                    }else{
+                    a=$("<a href='javascript:void(0)' id="
+                    +item.id+" name="
+                    +item.name+">"+item.realName+"</a>")
+                }
+                /*追加*/
+                tr.find('.chose').append(a);
+            })
+            $('tbody').append(tr);
+        })
+
+        /*知识点信息*/
+        $.getJSON('/exam/manger/find_epartment',function(data){
+            var tr = $('tr:hidden').clone().removeAttr('hidden');
+            tr.find(".chose").html("");
+            tr.children('td').eq(0).html("知识点");
+            data.forEach(function(item,index){
+                if(index == 0){
+                    a=$("<a href='javascript:void(0)' id="
+                    +item.id+" class='active3'>"+item.name+"</a>")
+                }
+                else{
+                    a=$("<a href='javascript:void(0)' id="+item.id+">"+item.name+"</a>")                         }
+                /*追加*/
+                tr.find('.chose').append(a);
+            })
+            $('.tablea tbody').append(tr);
+            
+            $('.tablea').on('click','a',function(){
+                /*点击按钮样式改变*/
+                $(this).addClass('active3').siblings().removeClass('active3');
+                /*拿到四个,并向后台发送四个id*/
+                var arr = $('.tablea tbody tr td div a.active3').get();
+                var type='';
+                var direct='';
+                var level='';
+                var topic='';
+                /*拿到四个选项的id*/
+                arr.forEach(function(item,index,arr){
+                    var atd = $(item).parent().parent().parent().children().eq(0).html();
+                    switch(atd){
+                        case '类型':type=$(item).attr("id");
+                            break;
+                        case '方向':direct=$(item).attr("id");
+                            break;
+                        case '难度':level=$(item).attr("id");
+                            break;
+                        case '知识点':topic=$(item).attr("id");
+                            break;
+                    }
+                })
+                //发送到后台,后台根据需要将题目展示出来。
+                //   /exam/manger/find_epartment
+                $.ajax('/exam/manger/querySubject',{
+                    // $.ajax('../data/subject.json',{
+                    method:"post",
+                    //携带的数据
+                    data:{
+                        "subject.department.id":direct,
+                        "subject.topic.id":topic,
+                        "subject.subjectType.id":type,
+                        "subject.subjectLevel.id":level,
+                    },
+                    //成功之后将获取到的后台的题目展示在页面上
+                    success:function(data){
+                        // console.log("hello");
+                        showData(data);
+                        // checked();
+                    }
+                })
+
+            });
+            // $('.tablea').trigger('click');
+        })
     
-  })
+    })
 
     // 显示数据 (⊙o⊙)
     function showData(data){
