@@ -1,0 +1,71 @@
+<!--最右边的加载内容   一个大大的框框 -->
+<div class="right">
+
+    <!-- 相当于内容 -->
+    <div class="editingarea">
+
+        <!--相等于内容的第一层  也就是头部 -->
+        <div class="c_flex">
+            <span class="c_flexible"></span>
+        </div>
+
+        <!--相等于内容的第二层  也就是内容部分 -->
+        <div class="c_editview">
+
+            <!-- content one  -->
+            <div class="c_condition">
+                <span><select><option>题干</option></select></span>
+                <span class="pl5 " ><input type="text"></span>
+                <span class="pl15 pr15 btn_gray ">查找</span>
+                <span class="icon_lead-in"><em class="icon_r">批量导入题目</em></span>
+                <span class="icon_add"><em class="icon_r">单个添加题目</em></span>
+            </div>
+
+            <!--content two  -->
+            <div class="divtable">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tablea">
+                    <tr hidden>
+                        <th>年份</th>
+                        <th align="left">
+                            <div class="chose"><a href="#" class="active3">全部</a><a href="#">语文</a><a href="#">数学</a><a href="#">英语</a><a href="#">政治</a></div>
+                        </th>
+                    </tr>
+                </table>
+            </div>
+            <!--content three  -->
+            <div class="Catalog">
+                <div class="Catalog_right">
+                    <div class="Catalogtitle">总计<em>15552</em>道题&nbsp;&nbsp;提示：单击体面可显示答案和解析&nbsp;&nbsp;<input type="checkbox" /><b>显示答案和解析</b>&nbsp;&nbsp;<a href="#" class="Thispage">本页全部试题加入试卷</a><div><i>1</i><a href="#" class="pageone">前</a><a href="#" class="pagetwo">后</a></div></div>
+                    <div class="Catalog_rightnei">
+                        <div class="Catalogtitwo">题号：25544&nbsp;&nbsp;题型：还是得&nbsp;&nbsp;难度：订餐&nbsp;&nbsp;上传人：女性司机&nbsp;&nbsp;来源：才能使得&nbsp;&nbsp;上传时间:220255&nbsp;&nbsp;组卷次数：<em>0</em></div>
+                        <div class="Catalogcontent">
+                            <div class="Catalogcontentup">题型</div>
+                            <div class="Catalogcontentdown"><a href="#">审核通过</a><a href="#">审核不通过</a><a href="#">删除题目</a></div>
+                        </div>
+                    </div>
+                    <div class="Catalog_rightnei">
+                        <div class="Catalogtitwo">题号：25544&nbsp;&nbsp;题型：还是得&nbsp;&nbsp;难度：订餐&nbsp;&nbsp;上传人：女性司机&nbsp;&nbsp;来源：才能使得&nbsp;&nbsp;上传时间:220255&nbsp;&nbsp;组卷次数：<em>0</em></div>
+                        <div class="Catalogcontent">
+                            <div class="Catalogcontentup">题型</div>
+                            <div class="Catalogcontentdown"><a href="#">加入试卷</a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script src="../jquery-2.1.4/jquery.min.js"></script>
+<script>
+    $(function(){
+        alert("hello");
+    })
+    $.getJSON('../theme/json/subject.json',function(data){
+        var tr = $('.tablea firstchild').clone().removeAttr("hidden");
+    })
+</script>
