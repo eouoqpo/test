@@ -92,6 +92,10 @@ th.bgl{ background:url(../images/theme/bgl.jpg) repeat-x;}
 .tablog{margin: 0;padding: 0;border: 1px solid #d2d6d7;border-collapse: collapse}
 .tablog td{ line-height: 35px;border: 1px solid #d2d6d7;}
 
+.pamion{
+	display: hidden;
+}
+
 
 
 

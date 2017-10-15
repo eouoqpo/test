@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>3-1添加题目-单选题</title>
+<title>3-1添加题目-单选题  lalala</title>
 <link rel="stylesheet" type="text/css" href="../theme/1/css/common.css">
 <link rel="stylesheet" type="text/css" href="../theme/1/css/style.css">
 <link rel="stylesheet" type="text/css" href="../theme/1/css/EditingArea.css">
@@ -108,36 +108,44 @@
                                   <!--选项A的父级  -->
                                   <div class="Answerpart">
                                      <div class="Answerpart_left">
-                                         <p>A</p><span><input type="radio" name="seleAnsw"/></span>
+                                         <p>A</p><span><input type="radio" name="answer"/></span>
                                      </div>
-                                     <div class="Answerpart_right"></div>
+                                     <div class="Answerpart_right">
+                                         <textarea name="choiceContent" cols="50" rows="2"></textarea>
+                                     </div>
                                      <div class="clear"></div>
                                   </div>
 
                                 <!--选项B的父级  -->
                                 <div class="Answerpart">
                                     <div class="Answerpart_left">
-                                        <p>B</p><span><input type="radio" name="seleAnsw"/></span>
+                                        <p>B</p><span><input type="radio" name="answer"/></span>
                                     </div>
-                                    <div class="Answerpart_right"></div>
+                                    <div class="Answerpart_right">
+                                        <textarea name="choiceContent" cols="50" rows="2"></textarea>
+                                    </div>
                                     <div class="clear"></div>
                                 </div>
 
                                 <!--选项C的父级  -->
                                 <div class="Answerpart">
                                     <div class="Answerpart_left">
-                                        <p>C</p><span><input type="radio" name="seleAnsw"/></span>
+                                        <p>C</p><span><input type="radio" name="answer"/></span>
                                     </div>
-                                    <div class="Answerpart_right"></div>
+                                    <div class="Answerpart_right">
+                                        <textarea name="choiceContent" cols="50" rows="2"></textarea>
+                                    </div>
                                     <div class="clear"></div>
                                 </div>
 
                                 <!--选项D的父级  -->
                                 <div class="Answerpart">
                                     <div class="Answerpart_left">
-                                        <p>D</p><span><input type="radio" name="seleAnsw"/></span>
+                                        <p>D</p><span><input type="radio" name="answer"/></span>
                                     </div>
-                                    <div class="Answerpart_right"></div>
+                                    <div class="Answerpart_right">
+                                        <textarea name="choiceContent" cols="50" rows="2"></textarea>
+                                    </div>
                                     <div class="clear"></div>
                                 </div>
                                 <!--kklll  -->
@@ -192,7 +200,7 @@
                     // <option value="" class=""></option>
                     console.log(item);
                     // id: 3, name: "question", realName: "简答题
-                    var option = $('<option value="'+item.id+'">'+item.realName+'</option>');
+                    var option = $('<option id="'+item.id+'" value="'+item.id+'">'+item.realName+'</option>');
                     $('#type_add').append(option);
                 })
                 $('.c_editview .Answeroptions .c_condition').hide();
@@ -209,7 +217,7 @@
                     // <option value="" class=""></option>
                     console.log(item);
                     // id: 4, title: "jQuery", department_id: 1
-                    var option = $('<option value="'+item.id+'">'+item.title+'</option>');
+                    var option = $('<option id="'+item.id+'" value="'+item.id+'">'+item.title+'</option>');
                     $('#topic_add').append(option);
                 })
             })
@@ -226,7 +234,7 @@
                     // <option value="" class=""></option>
                     console.log(item);
                     // id: 3, name: "difficult", realName: "难"
-                    var option = $('<option value="'+item.id+'">'+item.realName+'</option>');
+                    var option = $('<option id="'+item.id+'" value="'+item.id+'">'+item.realName+'</option>');
                     $('#level_add').append(option);
                 })
             })
@@ -244,7 +252,7 @@
                     // <option value="" class=""></option>
                     console.log(item);
                     // id: 1, name: "WebUI"
-                    var option = $('<option value="'+item.id+'">'+item.name+'</option>');
+                    var option = $('<option id="'+item.id+'" value="'+item.id+'">'+item.name+'</option>');
                     $('#epartment_add').append(option);
                 })
             })
@@ -275,6 +283,8 @@
             // alert("1");
             $('.c_editview .Answeroptions .Answerpart').show();
             $('.c_editview .Answeroptions .c_condition').hide();
+            $('.Answerpart_left input').attr('type','radio');
+            // $('.Answerpart_left input').attr('name','seleAnsw');
             $('#A_Show_select').remove();
             // addSeleMM();
         }else if(sele_one == 2){
@@ -293,12 +303,12 @@
                 // var $input = $('.Answeroptions .Answercontent .Answerpart').clone();
                 // console.log($input.find('p').html());
                 // $('.Answeroptions .Answercontent').append($input);
-                $('#AmionDiv').before('<div class="Answerpart" id="A_Show_select"><div class="Answerpart_left"><p>'+seleContArr[seleContIndex]+'</p><span><input type="radio" name="seleAnsw"/></span></div><div class="Answerpart_right"></div><div class="clear"></div></div>');
+                $('#AmionDiv').before('<div class="Answerpart" id="A_Show_select"><div class="Answerpart_left"><p>'+seleContArr[seleContIndex]+'</p><span><input type="radio" name="answer"/></span></div><div class="Answerpart_right"><textarea name="" id="" cols="50" rows="2"></textarea></div><div class="clear"></div></div>');
                 // alert('tianjiaol');
             });
 
             //   移除name属性
-            $('.Answerpart_left input').removeAttr('name');
+            // $('.Answerpart_left input').removeAttr('name');
             $('.Answerpart_left input').attr('type','checkbox');
         }else if(sele_one == 3){
             // alert('hello divmm');
@@ -320,32 +330,75 @@
         // alert("准备延迟");
         console.log("准备延迟");
         setTimeout(function(){
+            //   类型的获取
             var A_type_add_Cont = $('.Attributetit #type_add option:selected').val();
+            //   方向的获取
             var A_epartment_add_Cont = $('.Attributetit #epartment_add option:selected').val();
+            // 难易程度的获取
             var A_level_add_Cont = $('.Attributetit #level_add option:selected').val();
+            //  知识点的获取
             var A_topic_add_Cont = $('.Attributetit #topic_add option:selected').val();
+            //  题干的获取
             var stem = $('#quest_stem textarea').val();
+            //  答案的获取
             var answer = $('#quest_answer textarea').val();
+            var choiceContents = new Array();
             if(A_type_add_Cont != 3){
-                if(A_type_add_Cont != 2){
-                    // console.log('hello  1');
-                    
-                }else{
-
+                $("textarea[name='choiceContent']").each(function(index,item){
+                    choiceContents[index] = $(item).val();
+                    console.log(choiceContents,'choiceContents====');
+                });
+                var correctChoices = new Array();
+                if(A_type_add_Cont == 1){
+                    $(":radio[name='answer']").each(function(index,item){
+                        correctChoices[index] = $(item).prop("checked");
+                    });
+                }else if(A_type_add_Cont == 2){
+                    $(":checkbox[name='answer']").each(function(index,item){
+                        correctChoices[index] = $(item).prop("checked");
+                    });
                 }
             }
-            console.log('answer',answer);
-            console.log('stem',stem);
+            console.log(choiceContents,'choiceContents5555555',correctChoices,'correctChoices  right');
+            // console.log('answer',answer);
+            // console.log('stem',stem);
 
-            //     测试是否成功获取
-            /*
-            console.log(A_type_add_Cont,'A_type_add_Cont');
-            console.log(A_epartment_add_Cont,'A_epartment_add_Cont');
-            console.log(A_level_add_Cont,'A_level_add_Cont');
-            console.log(A_topic_add_Cont,'A_topic_add_Cont');
-            */
 
-            alert("延迟了吗？");
+            $.ajax("/exam/manager/saveSubject",{
+                method:"post",
+                traditional :true, 
+                data:{
+                    "subject.department.id":A_epartment_add_Cont,
+                    "subject.topic.id":A_topic_add_Cont,
+                    "subject.subjectType.id":A_type_add_Cont,
+                    "subject.subjectLevel.id":A_level_add_Cont,
+                    "subject.stem":stem,
+                    "subject.answer":answer,
+                    // "subject.analysis":analysis,
+                    "choiceContent":choiceContents,
+                    "choiceCorrect":correctChoices
+                },
+                success: function(data){
+                    alert(data);
+                    if(SumitContM=='保存并继续'){
+                        // refresh();
+                        // document.location.reload();
+                    }
+                },
+                error:function(data){
+                    $("textarea[name='choiceContent']").val();
+                    // document.location.reload();
+                    // refresh();
+                    alert("失败了~~~~(>_<)~~~~");
+                    
+                    // refresh();
+                }
+            });
+
+
+
+
+            
         }, 1000);
     })
 

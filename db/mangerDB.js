@@ -21,9 +21,34 @@ module.exports ={
         var sql = "select * from tbl_exam_epartment";
         return pool.execute(sql);
     },
+    saveSubject(aa){
+        /*
+            发过来的数据格式
+            "subject.topic.id":A_topic_add_Cont,
+            "subject.subjectType.id":A_type_add_Cont,
+            "subject.subjectLevel.id":A_level_add_Cont,
+            "subject.stem":stem,
+            "subject.answer":answer,
+            // "subject.analysis":analysis,
+            "choiceContent":choiceContents,
+            "choiceCorrect":correctChoices
+
+        */
+        var queryInfo = aa;
+        var dep = queryInfo['subject.department.id'];
+        var topic = queryInfo['subject.topic.id'];
+        var types = queryInfo['subject.subjectType.id'];
+        var level = queryInfo['subject.subjectLevel.id'];
+        var answer = queryInfo['subject.answer'];
+        var stem = queryInfo['subject.stem'];
+        console.log(queryInfo);
+        var sql = "insert into tbl_exam_subject(answer,checkState,stem,department_id,subjectLevel_id,subjectType_id,topic_id) values('"
+        +answer+"','未审核','"+stem+"',"+dep+","+level+","+types+",,"+topic+")";
+        return pool.execute(sql);
+    },
     querySubject(aa){
         // department_id   subjectLevel_id  subjectType_id  topic_id
-        var queryInfo = aa;
+        var queryInfo = JSON.parse(aa);
         console.log(queryInfo);
         var dep = queryInfo['subject.department.id'];
         var topic = queryInfo['subject.topic.id'];

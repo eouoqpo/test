@@ -55,6 +55,17 @@ route.post('/querySubject',(req,resp)=>{
     });
 });
 
+
+route.post('/saveSubject',(req,resp)=>{
+    Object.assign(req.body);
+    console.log(req.body,'===========================');
+    mangerDB.saveSubject(req.body).then((data)=>{
+        resp.send(data);
+    }).catch((error)=>{
+        resp.send(error);
+    });
+});
+
 // updateSubject
 route.get('/updateSubject',(req,resp)=>{
     Object.assign(req.body);

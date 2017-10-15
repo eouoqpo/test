@@ -30,7 +30,10 @@
         <div class="Catalog">
             
             <div class="Catalog_right">
-                <div class="Catalogtitle">总计<em>15552</em>道题&nbsp;&nbsp;提示：单击体面可显示答案和解析&nbsp;&nbsp;<input type="checkbox" checked='true'/><b>显示答案和解析</b>&nbsp;&nbsp;<a href="#" class="Thispage">本页全部试题加入试卷</a><div><i>1</i><a href="#" class="pageone">前</a><a href="#" class="pagetwo">后</a></div></div>
+                <div class="Catalogtitle" id="CatalogTitle">
+                    总计<em>15552</em>
+                    道题&nbsp;&nbsp;提示：单击体面可显示答案和解析&nbsp;&nbsp;
+                    <input type="checkbox" class="showAnswer"><b>显示答案和解析</b>&nbsp;&nbsp;<a href="#" class="Thispage">本页全部试题加入试卷</a><div><i>1</i><a href="#" class="pageone">前</a><a href="#" class="pagetwo">后</a></div></div>
                 <div class="Catalog_rightnei">
                     <div class="Catalogtitwo">题号：25544&nbsp;&nbsp;题型：还是得&nbsp;&nbsp;难度：订餐&nbsp;&nbsp;上传人：♪(^∇^*)&nbsp;&nbsp;来源：O(∩_∩)O~&nbsp;&nbsp;上传时间:220255&nbsp;&nbsp;组卷次数：<em>0</em></div>
                     <div class="Catalogcontent">
@@ -51,26 +54,13 @@
                         <div class="Catalogcontentup">题型：</div>
                         <div class="Catalogcontentdown">
                             <!--加上题目的id  -->
-                            <!-- <a href="javascript:void(0)" hidden>审核通过</a> -->
-                            <!-- <a href="javascript:void(0)">审核不通过</a> -->
-                            <!-- <a href="javascript:void(0)">删除题目</a> -->
+                            <a href="javascript:void(0)" hidden>审核通过</a> 
+                            <a href="javascript:void(0)">审核不通过</a>
+                            <a href="javascript:void(0)">删除题目</a>
                         </div>
                     </div>
                 </div>
             </div>
-            
-            <!-- <div class="Catalog_right"> -->
-                <!-- <div class="Catalogtitle">
-                    总计<em>15552</em>
-                    道题&nbsp;&nbsp;
-                    提示：单击体面可显示答案和解析&nbsp;&nbsp;
-                    <input type="checkbox" />
-                    <b>显示答案和解析</b>&nbsp;&nbsp;
-                    <a href="#" class="Thispage">本页全部试题加入试卷</a>
-                    <div><i>1</i><a href="#" class="pageone">
-                        前</a><a href="#" class="pagetwo">后</a></div></div> -->
-                
-            <!-- </div> -->
             <div class="clear"></div>
         </div>
     </div> 
@@ -88,7 +78,7 @@
     $(function(){
         /*点击单个添加题目，页面跳转*/
         $('.c_condition .icon_add .icon_r').click(function(){
-        $('.right').load('./load/addSubject.html');
+        $('.right').load('./load/subjectContent.html');
         })
 
         /*类型信息*/
@@ -222,10 +212,6 @@
     // 显示数据 (⊙o⊙)
     function showData(data){
         data = JSON.parse(JSON.stringify(data));
-        console.log('===data===',data);
-        // var obj = eval('('+data+')');
-        // var subjectType_id = obj['subjectType_id'];
-        // console.log(subjectType_id,'hello ====');
 
 
         //修改标题显示题目有多少道
@@ -240,11 +226,6 @@
             // console.log(item,'=====item====');
             var div=$(".Catalog_rightnei:hidden").clone().removeAttr("hidden");
             $(".Catalog_right").append(div);
-            // div.find(".Catalogtitwo").html
-            // ("题号:&nbsp;&nbsp;题型:"+item.subjectType.realName+"&nbsp;&nbsp;
-            // 难度:"+item.subjectLevel.realName+"&nbsp;&nbsp;
-            // 上传人:"+item.user+"&nbsp;&nbsp;来源:"+null+"&nbsp;&nbsp;
-            // 上传时间:"+item.uploadTime+"&nbsp;&nbsp;组卷次数:<em>0</em>");
             //题目id
             var id = item.id;
             // console.log(id);
@@ -256,15 +237,11 @@
             // 测试获取的subjectType 获取是否正确
             // console.log(subjectType_id,'=======subjectType_id=========');
             var stemOne=$("<span>"+item.stem+"</span>");
-            var stemTwo=$('<span style="display:float;margin-top:80px;">(   答案："'+item.answer+'")</span>');
+            // style="position:relative;top:120px;color:red;"
+            var stemTwo=$('<p id="P_ans" style="display:hidden;position:relative;top:120px;color:red;">(   答案："'+item.answer+'")</p>');
             console.log(item.answer,'zuijindayind item ');
             div.find(".Catalogcontentup").append(stemOne);
             div.find(".Catalogcontentup").append(stemTwo);
-
-
-            $('div.Catalogcontentdown').append('<a href="javascript:void(0)" value="'+id+'">审核通过</a>');
-            $('div.Catalogcontentdown').append('<a href="javascript:void(0)" value="'+id+'">未审核通过</a>');
-            $('div.Catalogcontentdown').append('<a href="javascript:void(0)" value="'+id+'">删除题目</a>');
 
 
             //   为  通过审核    删除题目绑定事件 $('div.Catalogcontentdown')
@@ -301,7 +278,7 @@
                 $('.ol_one').remove();
             }
             if(subjectType_id != 3){
-                console.log("hello");
+                // console.log("hello");
                 $.getJSON('/exam/manger/queryChoice?id='+id,function(data){
                     console.log(data);
                     
@@ -313,35 +290,25 @@
                         }else{
                             $('.Catalogcontentup .ol_one').append('<li>'+item.content+'</li>');
                         };
-                        
-                        // console.log(item);
-                        // console.log(item.content);
                     });
                 });
             };
-            
-            // $(function(){
-            //     if($('.Catalogtitle input').attr("checked")){
-            //         $('.Catalogcontentup').append('<li>hello nihao</li>');
-            //     }
-            // });
 
             $('Catalogcontentdown').find(a).attr({value:""+id+""});
-            // $().on('click',function(){});
-            // a.find("Catalogcontentdown").attr({value:""+id+""});
         })
         var Suj_lgth = $(".Catalogtitle").find("em").html();
         // console.log(Suj_lgth,'=====Suj_lgth======');
         // if($("#id").attr("checked")==true)
+        
+        // 单选的选项   
         $(function(){
-            if($('.Catalogtitle input').attr("checked")){
-                // console.log('checked');
-                // $('.Catalogtitle input').attr("checked");
+            // if($('.Catalogtitle input').attr("checked")){
                 var Suj_lgth = $(".Catalogtitle").find("em").html();
                 // console.log(Suj_lgth,'=====Suj_lgth======');
                 if(Suj_lgth){
                     console.log('amion hello');
                     var data_One = $('div.Catalogcontentup').get();
+                    var $itemAnsw ;
                     data_One.forEach(function(item,index){
                         console.log(item,'item data_One');
                         if(item.correct){
@@ -349,153 +316,25 @@
                         }else{
                             $('.Catalogcontentup .ol_one').append('<li>'+item.content+'</li>');
                         }
-                        // console.log(item);
-                        // console.log(item.content);
                     });
-                    // console.log($('div.Catalogcontentup').get(),'this is 题目的id');
-                    // $('.Catalogcontentup').append('<ol style="margin-top:30px"></ol>');
+                    
                 }
-                /*
-                else{
-                    $('.Catalogtitle input').removeAttr('checked');
-                }
-                */
 
-            }
+            // }
         });
-        // else{
-        //     $('.Catalogtitle input').removeAttr('checked');
-        // }
     }   
 
-
-    //   为  通过审核    删除题目绑定事件 $('div.Catalogcontentdown')
-    
-
-
-
-
     // 显示答案
-    /*
-    function checked(){
-        var Suj_lgth = $(".Catalogtitle").find("em").html();
-        console.log(Suj_lgth,'=====Suj_lgth======');
-        if(Suj_lgth){
-            console.log('checked');
-            $('.Catalogtitle input').removeAttr('checked');
-        }else{
-            $('.Catalogtitle input').removeAttr('checked');
-        }
-    }
-    */
-</script>
 
-
-
-
-<!--
-<script>
-    $.getJSON("/exam/manger/subject_type",function(data){
-    // $.getJSON("../exam/manager/getAllSubjectType",function(data){
-        // console.log(data);
-        var tr = $(".tr_first").clone().removeAttr("hidden");
-        tr.find(".chose").html("");
-        tr.children('td').eq(0).html("类型");
-        
-        data.forEach(function(item,index){
-            if(index ==0 ){
-                var a = $("<a href='javascript:void(0)' value='"+item.id+"' class='active3'>"+item.realName+"</a>")
+    $('.Catalogtitle :checkbox').click(function(){   
+            if($('input[type=checkbox]').is(':checked')){
+                $('#P_ans').show()
             }else{
-                var a = $("<a href='javascript:void(0)' value='"+item.id+"' class=''>"+item.realName+"</a>")
+                $('#P_ans').hide();
             }
-            tr.find(".chose").append(a);
-        })
-        $("tbody").append(tr);
-    })
-
-
-    $.getJSON("/exam/manger/subject_level",function(data){
-        var tr = $("tr:hidden").clone().removeAttr("hidden");
-        tr.find(".chose").html("");
-        tr.children('td').eq(0).html("难易程度");
-        // $(".chose").html("");
-        // $("td:first-child").html("");
-        
-        data.forEach(function(item,index){
-            if(index ==0 ){
-                var a = $("<a href='javascript:void(0)' value='"+item.id+"' class='active3'>"+item.realName+"</a>")
-            }else{
-                var a = $("<a href='javascript:void(0)' value='"+item.id+"' class=''>"+item.realName+"</a>")
-            }
-            tr.find(".chose").append(a);
-        })
-        $(".tablea").append(tr);
-    })
-
-
-    $.getJSON("/exam/manger/find_epartment",function(data){
-        var tr = $("tr:hidden").clone().removeAttr("hidden");
-        tr.find(".chose").html("");
-        tr.children('td').eq(0).html("知识点");
-        // $("td:first-child").html("");
-        
-        data.forEach(function(item,index){
-            if(index ==0 ){
-                var a = $("<a href='javascript:void(0)' value='"+item.id+"' class='active3'>"+item.name+"</a>")
-            }else{
-                var a = $("<a href='javascript:void(0)' value='"+item.id+"' class=''>"+item.name+"</a>")
-            }
-            $(".chose").append(a);
-        })
-        $("tbody").append(tr);
-    })
-
-
-
-    $.getJSON("/exam/manger/find_topic",function(data){
-        var tr = $("tr:hidden").clone().removeAttr("hidden");
-        tr.find(".chose").html("");
-        tr.children('td').eq(0).html("方向");
-        // $("td:first-child").html("");
-       
-        data.forEach(function(item,index){
-            if(index ==0 ){
-                var a = $("<a href='javascript:void(0)' value='"+item.id+"' class='active3'>"+item.title+"</a>")
-            }else{
-                var a = $("<a href='javascript:void(0)' value='"+item.id+"' class=''>"+item.title+"</a>")
-            }
-            tr.find(".chose").append(a);
-        })
-        $("tbody").append(tr);
-    })
-
+    });
 
 </script>
--->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
